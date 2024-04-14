@@ -1,12 +1,12 @@
--- MariaDB
-CREATE DATABASE soul
-COLLATE = `uca1400_spanish_ai_ci`; 
--- Accent Insensitive Case Insensitive
+-- Crear la base de datos "soul" MariaDB
+CREATE DATABASE soul 
+COLLATE = 'uca1400_spanish_ai_ci';
 
-Use soul;
+-- Usar la base de datos "soul"
+USE soul;
 
-CREATE TABLE Users
-(
+-- Tabla de usuarios
+CREATE TABLE Users (
     Id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Name NVARCHAR(255) NOT NULL,
     Lastname NVARCHAR(255) NOT NULL,
@@ -16,35 +16,40 @@ CREATE TABLE Users
     INDEX email_idx(Email)
 );
 
-CREATE TABLE Courses
-(
+-- Tabla de cursos
+CREATE TABLE Courses (
     Id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Name NVARCHAR(255) NOT NULL,
     Description NVARCHAR(255) NOT NULL,
     Duration NVARCHAR(255) NOT NULL,
-    level NVARCHAR(255) NOT NULL,
+    Level NVARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Lessons
-(
+-- Tabla de lecciones
+CREATE TABLE Lessons (
     Id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    CourseId INT UNSIGNED,
     Title NVARCHAR(255) NOT NULL,
     Description NVARCHAR(255) NOT NULL,
     Content TEXT,
-    Curso al que pertenece,
-)
+    FOREIGN KEY (CourseId) REFERENCES Courses(Id)
+);
 
-CREATE TABLE UserProgress
-(
-    ID de usuario,
-    ID de lección,
-    fecha en que se completó la lección
-)
+-- Tabla de progreso del usuario
+CREATE TABLE UserProgress (
+    UserId INT UNSIGNED,
+    LessonId INT UNSIGNED,
+    Fecha DATE,
+    FOREIGN KEY (UserId) REFERENCES Users(Id),
+    FOREIGN KEY (LessonId) REFERENCES Lessons(Id)
+);
 
-CREATE TABLE Comments
-(
+-- Tabla de comentarios
+CREATE TABLE Comments (
     Id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    usuario que comento,
-    id del curso al que se refiere,
-    Content TEXT
-)
+    UserId INT UNSIGNED,
+    CourseId INT UNSIGNED,
+    Content TEXT,
+    FOREIGN KEY (UserId) REFERENCES Users(Id),
+    FOREIGN KEY (CourseId) REFERENCES Courses(Id)
+);
