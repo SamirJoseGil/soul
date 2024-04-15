@@ -21,4 +21,43 @@ public class User{
 
 
     
+    public Long getId() {
+        return Id;
+    }
+    public void setId(Long id) {
+        Id = id;
+    }
+    public String getName() {
+        return Name;
+    }
+    public void setName(String name) {
+        Name = name;
+    }
+    public String getLastname() {
+        return Lastname;
+    }
+    public void setLastname(String lastname) {
+        Lastname = lastname;
+    }
+    public String getEmail() {
+        return Email;
+    }
+    public void setEmail(String email) {
+        Email = email;
+    }
+    public String getPhone() {
+        return Phone;
+    }
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
+    public String getPasshash() {
+        return Passhash;
+    }
+    public void setPasshash(String passhash) {
+        Passhash = passhash;
+    }
+
+
+    
 }
