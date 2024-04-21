@@ -39,7 +39,7 @@ CREATE TABLE Lessons (
 CREATE TABLE UserProgress (
     UserId INT UNSIGNED,
     LessonId INT UNSIGNED,
-    Fecha DATE,
+    Date DATE,
     FOREIGN KEY (UserId) REFERENCES Users(Id),
     FOREIGN KEY (LessonId) REFERENCES Lessons(Id)
 );
