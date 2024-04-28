@@ -5,12 +5,15 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import sena.soul.repository.UserRepository;
 import sena.soul.interfaces.BaseUserService;
 import sena.soul.models.User;
 
 public class UserService implements BaseUserService {
 
+    @Autowired
     private UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {

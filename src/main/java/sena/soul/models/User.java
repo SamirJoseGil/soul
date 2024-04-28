@@ -20,7 +20,7 @@ public class User{
     private String Passhash;
 
 
-    
+
     // Getters and Setters
     public Long getId() {
         return Id;

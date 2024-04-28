@@ -7,11 +7,12 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name ="userprogress")
-public class UserProgress {
+public class UserProgres {
     
     private Long UserId;
     private Long LessonId;
     private Date Date;
+
 
 
     //Getters and Setters
