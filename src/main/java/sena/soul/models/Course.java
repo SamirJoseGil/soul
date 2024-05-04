@@ -8,27 +8,27 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name ="lessons")
-public class Lessons {
+@Table(name="courses")
+public class Course {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long course_id;
-    private String title;
+    private String name;
     private String description;
-    private String content;
+    private String duration;
+    private String level;
 
 // toString
 
     @Override
     public String toString() {
-        return  "Lessons {" +
+        return "Courses {" +
                 "id='" + id + '\'' +
-                ", course_id='" + course_id + '\'' +
-                ", title_id='" + title + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", content='" + content + '\'' +
+                ", duration='" + duration + '\'' +
+                ", level='" + level + '\'' +
                 '}';
     }
 
@@ -43,20 +43,12 @@ public class Lessons {
         this.id = id;
     }
 
-    public long getCourse_id() {
-        return course_id;
+    public String getName() {
+        return name;
     }
 
-    public void setCourse_id(long course_id) {
-        this.course_id = course_id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -67,11 +59,19 @@ public class Lessons {
         this.description = description;
     }
 
-    public String getContent() {
-        return content;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

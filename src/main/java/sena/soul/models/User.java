@@ -5,17 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name="Users")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name="users")
 public class User {
 
     @Id
@@ -25,19 +17,69 @@ public class User {
     private String last_name;
     private String email;
     private String phone;
-    private String passhash;
+    private String password;
+
+// toString
 
     @Override
     public String toString() {
         return "User {" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            ", last_name='" + last_name + '\'' +
-            ", email='" + email + '\'' +
-            ", phone='" + phone + '\'' +
-            ", passhash='" + passhash + '\'' +
-            '}';
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
-    
+
+// Getters and Setters
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -4,32 +4,51 @@ import java.sql.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name ="user_progress")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class UserProgress {
     
-    private Long UserId;
-    private Long LessonId;
+    private long user_id;
+    private long lesson_id;
     private Date Date;
 
 
+// .toString
+
     @Override
     public String toString() {
-        return "UserProgress{" +
-                "UserId='" + UserId + '\'' +
-                ", LessonId='" + LessonId + '\'' +
+        return "user_progress{" +
+                "user_id='" + user_id + '\'' +
+                ", lesson_id='" + lesson_id + '\'' +
                 ", Date='" + Date + '\'' +
                 '}';
     }
 
 
+//Getters and Setters
+
+    public long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
+    }
+
+    public long getLesson_id() {
+        return lesson_id;
+    }
+
+    public void setLesson_id(long lesson_id) {
+        this.lesson_id = lesson_id;
+    }
+
+    public java.sql.Date getDate() {
+        return Date;
+    }
+
+    public void setDate(java.sql.Date date) {
+        Date = date;
+    }
 }

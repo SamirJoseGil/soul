@@ -6,50 +6,50 @@ COLLATE = 'uca1400_spanish_ai_ci';
 USE soul;
 
 -- Tabla de usuarios
-CREATE TABLE Users (
-    Id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Name NVARCHAR(255) NOT NULL,
-    Lastname NVARCHAR(255) NOT NULL,
-    Email NVARCHAR(255) NOT NULL,
-    Phone NVARCHAR(20) NOT NULL,
-    Passhash NVARCHAR(255) NOT NULL,
-    INDEX email_idx(Email)
+CREATE TABLE users (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL,
+    last_name NVARCHAR(255) NOT NULL,
+    email NVARCHAR(255) NOT NULL,
+    phone NVARCHAR(20) NOT NULL,
+    password NVARCHAR(255) NOT NULL,
+    INDEX email_idx(email)
 );
 
 -- Tabla de cursos
-CREATE TABLE Courses (
-    Id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Name NVARCHAR(255) NOT NULL,
-    Description NVARCHAR(255) NOT NULL,
-    Duration NVARCHAR(255) NOT NULL,
-    Level NVARCHAR(255) NOT NULL
+CREATE TABLE courses (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL,
+    description NVARCHAR(255) NOT NULL,
+    duration NVARCHAR(255) NOT NULL,
+    level NVARCHAR(255) NOT NULL
 );
 
 -- Tabla de lecciones
-CREATE TABLE Lessons (
-    Id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    CourseId INT UNSIGNED,
-    Title NVARCHAR(255) NOT NULL,
-    Description NVARCHAR(255) NOT NULL,
-    Content TEXT,
-    FOREIGN KEY (CourseId) REFERENCES Courses(Id)
+CREATE TABLE lessons (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    course_id INT UNSIGNED,
+    title NVARCHAR(255) NOT NULL,
+    description NVARCHAR(255) NOT NULL,
+    content TEXT,
+    FOREIGN KEY (course_id) REFERENCES courses(id)
 );
 
 -- Tabla de progreso del usuario
-CREATE TABLE UserProgress (
-    UserId INT UNSIGNED,
-    LessonId INT UNSIGNED,
+CREATE TABLE user_progress (
+    user_id INT UNSIGNED,
+    lesson_id INT UNSIGNED,
     Date DATE,
-    FOREIGN KEY (UserId) REFERENCES Users(Id),
-    FOREIGN KEY (LessonId) REFERENCES Lessons(Id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id)
 );
 
 -- Tabla de comentarios
-CREATE TABLE Comments (
-    Id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    UserId INT UNSIGNED,
-    CourseId INT UNSIGNED,
-    Content TEXT,
-    FOREIGN KEY (UserId) REFERENCES Users(Id),
-    FOREIGN KEY (CourseId) REFERENCES Courses(Id)
+CREATE TABLE comments (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED,
+    course_id INT UNSIGNED,
+    content TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (course_id) REFERENCES courses(id)
 );

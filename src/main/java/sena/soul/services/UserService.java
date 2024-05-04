@@ -35,8 +35,8 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User validateUser(String email, String passhash) {
-        User user = userRepository.findByEmailAndPasshash(email, passhash);
+    public User validateUser(String email, String password) {
+        User user = userRepository.findByEmailAndPassword(email, password);
         return user;
     }
 

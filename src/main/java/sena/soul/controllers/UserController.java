@@ -34,21 +34,21 @@ public class UserController {
 
     @GetMapping("/validate")
     @ResponseStatus(HttpStatus.OK)
-    public User validateUser(@Param("email") String email, @Param("passhash") String passhash) {
-        return userService.validateUser(email, passhash);
+    public User validateUser(@Param("email") String email, @Param("passhash") String password) {
+        return userService.validateUser(email, password);
     }
 
     @PutMapping("/add")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> addUser(@RequestBody User user) {
-        if (user.getPasshash().isEmpty() || user.getPasshash().length() < 15) {
-            return new ResponseEntity<>("La contraseña debe ser mayour a 15 caracteres", HttpStatus.BAD_REQUEST);
+        if (user.getPassword().isEmpty() || user.getPassword().length() < 8) {
+            return new ResponseEntity<>("La contraseña debe ser mayor a 8 caracteres", HttpStatus.BAD_REQUEST);
         }
 
         boolean result = userService.addUser(user);
 
         if (result)
-            return ResponseEntity.ok("Se ha creado el usaurio correctamente");
+            return ResponseEntity.ok("Se ha creado el usuario correctamente");
         else
             return ResponseEntity.ok("No se ha podido crear el usuario");
     }
