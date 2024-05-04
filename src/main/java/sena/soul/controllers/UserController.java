@@ -1,44 +1,61 @@
 package sena.soul.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import sena.soul.repository.UserRepository;
 import sena.soul.models.User;
 import sena.soul.services.UserService;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/soul/users")
+@RequestMapping("/users")
 @CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     
     @GetMapping("/getall")
-    public ResponseEntity<Iterable<User>> getAllUsers(){
-        
-        var users = new UserService(userRepository).getAllUsers();
-        return new ResponseEntity<Iterable<User>>(users, HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK)
+    public List<User> getAllUsers(){
+        return userService.getAll();
+    }
+
+    @GetMapping("/get_email")
+    @ResponseStatus(HttpStatus.OK)
+    public User getUser(@Param("email") String email) {
+        return userService.getUserByEmail(email);
+    }
+
+    @GetMapping("/validate")
+    @ResponseStatus(HttpStatus.OK)
+    public User validateUser(@Param("email") String email, @Param("passhash") String passhash) {
+        return userService.validateUser(email, passhash);
     }
 
     @PutMapping("/add")
-    public ResponseEntity<User> addUser(@RequestBody User user){
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> addUser(@RequestBody User user) {
+        if (user.getPasshash().isEmpty() || user.getPasshash().length() < 15) {
+            return new ResponseEntity<>("La contraseña debe ser mayour a 15 caracteres", HttpStatus.BAD_REQUEST);
+        }
 
-        var createdUser = new UserService(userRepository).addUser(user);        
+        boolean result = userService.addUser(user);
 
-        // Operador Ternario ?:
-        return createdUser.getId() == 0 ? new ResponseEntity<User>(createdUser, HttpStatus.BAD_REQUEST) :
-            new ResponseEntity<User>(createdUser, HttpStatus.OK);
+        if (result)
+            return ResponseEntity.ok("Se ha creado el usaurio correctamente");
+        else
+            return ResponseEntity.ok("No se ha podido crear el usuario");
     }
+
+
+
+
 
 }
 

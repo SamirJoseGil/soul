@@ -1,17 +1,13 @@
 package sena.soul.services;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import sena.soul.repository.UserRepository;
-import sena.soul.interfaces.BaseUserService;
 import sena.soul.models.User;
 
-public class UserService implements BaseUserService {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -20,46 +16,29 @@ public class UserService implements BaseUserService {
         this.userRepository = userRepository;
     }
 
-    @Override
     public Iterable<User> getAllUsers() {
         var userList = userRepository.findAll();
         return userList;
     }
 
-    @Override
-    public User addUser(User user) {
-        var createdUser = new User();
-        
-        try{
-            if(user.getPasshash().length() > 15)
-            {
-                user.setPasshash(blake3Formatter(user.getPasshash()));
-                createdUser = userRepository.saveAndFlush(user);
-                // AX300F12345
-            }
-        }
-        catch(Exception ex){
+    public boolean addUser(User user) {
+        User result = userRepository.save(user);
 
-        }       
-        
-        return createdUser;
+        return result != null;
     }
 
-    private String blake3Formatter(String value)  throws NoSuchAlgorithmException
-    {
-        final MessageDigest md = MessageDigest.getInstance("SHA3-512");
-        byte[] hash = md.digest(value.getBytes(StandardCharsets.UTF_8));
-        String sha3Hex = bytesToHex(hash);
-        return sha3Hex;
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 
-    private String bytesToHex(byte[] hash){
-        BigInteger number = new BigInteger(1, hash);
-        StringBuilder hexString = new StringBuilder(number.toString(16));
-        while(hexString.length() < 64){
-            hexString.insert(0, '0');
-        }
-        return hexString.toString();
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
+
+    public User validateUser(String email, String passhash) {
+        User user = userRepository.findByEmailAndPasshash(email, passhash);
+        return user;
+    }
+
     
 }
