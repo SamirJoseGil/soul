@@ -5,13 +5,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import sena.soul.models.Course;
 import sena.soul.services.CourseService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/courses")
 @CrossOrigin(origins = "*")
 public class CourseController {
 

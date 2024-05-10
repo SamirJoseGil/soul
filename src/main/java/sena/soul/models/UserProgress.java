@@ -1,14 +1,22 @@
 package sena.soul.models;
 
-import java.sql.Date;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.sql.Date;
 
 @Entity
 @Table(name ="user_progress")
 public class UserProgress {
-    
+
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private long user_id;
     private long lesson_id;
     private Date Date;
@@ -27,6 +35,14 @@ public class UserProgress {
 
 
 //Getters and Setters
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getUser_id() {
         return user_id;

@@ -2,11 +2,14 @@ package sena.soul.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
+
 import sena.soul.models.Course;
 import sena.soul.repository.CourseRepository;
 
 import java.util.List;
 
+@Service
 public class CourseService {
 
     @Autowired
@@ -29,15 +32,11 @@ public class CourseService {
     }
 
     public boolean existingCourseByName(String name) {
-        return courseRepository.existByName(name);
+        return courseRepository.existsByName(name);
     }
 
     public boolean addCourse(Course course) {
         Course result = courseRepository.save(course);
         return result != null;
     }
-
-
-
-
 }

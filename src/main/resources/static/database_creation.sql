@@ -37,6 +37,7 @@ CREATE TABLE lessons (
 
 -- Tabla de progreso del usuario
 CREATE TABLE user_progress (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT UNSIGNED,
     lesson_id INT UNSIGNED,
     Date DATE,
